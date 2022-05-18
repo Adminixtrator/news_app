@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/ui/news/news.dart';
 import 'package:news_app/utils/navigator.dart';
@@ -6,6 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import '../../core/constants/colors.dart';
 import '../../res/sizes.dart';
 import '../../res/styles.dart';
+import '../../ui/profile/profile.dart';
 import 'link_button.dart';
 
 class FeaturedNews extends StatelessWidget {
@@ -69,19 +71,33 @@ class FeaturedNews extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment
                             .spaceBetween,
                         children: [
-                          Row(children: [Container(
-                            height: MSize.take(40),
-                            width: MSize.take(40),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.black
-                                    .withAlpha(50)
-                            ),
-                          ),
+                          Row(children: [
+                            GestureDetector(
+                                onTap: () {
+                                  AppNavigator.route = const WriterProfile();
+                                  Navigator.pushNamed(context, '/profile');
+                                },
+                                child: Container(
+                                  height: MSize.take(40),
+                                  width: MSize.take(40),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.black
+                                          .withAlpha(50)
+                                  ),
+                                )),
                             NSize.hW(15),
-                            Text(
-                              "Alisa Manson",
-                              style: Styles.smallText,),
+                            RichText(
+                                text: TextSpan(
+                                    text: "Alisa Manson",
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        AppNavigator.route =
+                                        const WriterProfile();
+                                        Navigator.pushNamed(
+                                            context, '/profile');
+                                      },
+                                    style: Styles.smallText)),
                           ]),
                           const Text("2 min ago"),
                         ],

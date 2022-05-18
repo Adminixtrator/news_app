@@ -36,6 +36,7 @@ abstract class Styles {
   static TextStyle headline = const TextStyle(
       color: AppColors.black,
       fontSize: Fonts.pixel24,
+      fontFamily: 'Nunito',
       fontWeight: Fonts.w7
   );
 
@@ -51,6 +52,13 @@ abstract class Styles {
       fontFamily: 'Nunito',
       height: 1.5,
       fontWeight: Fonts.w7
+  );
+
+  static TextStyle headline4 = const TextStyle(
+      color: AppColors.black,
+      fontSize: Fonts.pixel22,
+      fontFamily: 'Nunito',
+      fontWeight: Fonts.w9
   );
 
   static TextStyle smallText = const TextStyle(

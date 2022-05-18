@@ -17,6 +17,8 @@ class _TextToSpeechButtonState extends State<TextToSpeechButton> {
         width: 65,
         child: FloatingActionButton(
             onPressed: () {},
+            splashColor: AppColors.transparent,
+            foregroundColor: AppColors.transparent,
             backgroundColor: AppColors.black,
             child: const Padding(padding: EdgeInsets.all(10),
               child: Icon(

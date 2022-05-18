@@ -1,4 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/shared/widgets/follow_button.dart';
+import 'package:news_app/ui/profile/profile.dart';
+import 'package:news_app/utils/navigator.dart';
 
 import '../../core/constants/colors.dart';
 import '../../res/sizes.dart';
@@ -12,10 +16,6 @@ class ProfileInfoRow extends StatefulWidget {
 }
 
 class _ProfileInfoRowState extends State<ProfileInfoRow> {
-
-  Color dC = AppColors.red;
-  String dS = "Follow";
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,57 +24,42 @@ class _ProfileInfoRowState extends State<ProfileInfoRow> {
       children: [
         Row(
             children: [
-              Container(
-                height: MSize.take(50),
-                width: MSize.take(50),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.black
-                        .withAlpha(50)
-                ),
-              ),
+              GestureDetector(
+                  onTap: () {
+                    AppNavigator.route = const WriterProfile();
+                    Navigator.pushNamed(context, '/profile');
+                  },
+                  child: Container(
+                    height: MSize.take(50),
+                    width: MSize.take(50),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.black
+                            .withAlpha(50)
+                    ),
+                  )),
               NSize.hW(15),
               RichText(text: TextSpan(
                   children: [
                     TextSpan(text: 'Alisa Manson\n',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            AppNavigator.route = const WriterProfile();
+                            Navigator.pushNamed(context, '/profile');
+                          },
                         style: Styles.smallText2),
                     TextSpan(text: 'Author',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            AppNavigator.route = const WriterProfile();
+                            Navigator.pushNamed(context, '/profile');
+                          },
                         style: Styles.footerText2),
                   ]
               )),
             ]),
-        SizedBox(
-          height: MSize.take(40),
-          width: MSize.take(110),
-          child: ElevatedButton(
-            onPressed: _toggleFollowUser,
-            style: ElevatedButton.styleFrom(
-                primary: dC,
-                elevation: 0.5,
-                splashFactory: NoSplash.splashFactory,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18)
-                )
-            ),
-            child: Text(dS, style: dS == 'Follow' ? Styles.activeTabText : Styles
-                .inactiveTabText),
-          ),
-        )
+        const FollowButton(),
       ],
     );
-  }
-
-  void _toggleFollowUser() {
-    if (dS == "Follow") {
-      setState(() {
-        dC = AppColors.faintGrey;
-        dS = "Following";
-      });
-    } else {
-      setState(() {
-        dC = AppColors.red;
-        dS = "Follow";
-      });
-    }
   }
 }
