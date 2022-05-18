@@ -9,6 +9,12 @@ abstract class Styles {
     fontWeight: Fonts.w9
   );
 
+  static TextStyle dropCap = const TextStyle(
+      color: AppColors.black,
+      fontSize: Fonts.pixel50 + 10,
+      fontWeight: Fonts.w8
+  );
+
   static TextStyle header = const TextStyle(
       color: AppColors.black,
       fontSize: Fonts.pixel28,
