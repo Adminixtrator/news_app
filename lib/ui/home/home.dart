@@ -7,6 +7,7 @@ import 'package:news_app/core/services/news/news_service.dart';
 import 'package:news_app/res/dummy.dart';
 import 'package:news_app/res/styles.dart';
 import 'package:news_app/shared/widgets/featured_news.dart';
+import 'package:news_app/shared/widgets/featured_news_loading.dart';
 import 'package:news_app/shared/widgets/news_category.dart';
 
 import '../../res/sizes.dart';
@@ -99,14 +100,14 @@ class _HomeState extends State<Home> {
                             child: Text("Featured", style: Styles.headline)),
                         ListView.builder(
                             shrinkWrap: true,
-                            itemCount: 5,
+                            itemCount: news.isEmpty ? 1 : 5,
                             physics: const NeverScrollableScrollPhysics(),
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 20),
                             itemBuilder: (BuildContext context, int index) {
                               return index == 0
-                                  ? FeaturedNews(featured: news[index])
-                                  : NewsWidget(news: news[index + 1]);
+                                  ? news.isEmpty ? const FeaturedNewsLoading() : FeaturedNews(featured: news[index])
+                                  : NewsWidget(news: news[index]);
                             }
                         ),
                       ]))),
@@ -116,14 +117,13 @@ class _HomeState extends State<Home> {
   }
 
   void fetchNews(String query) async {
-    print(query);
     NewsService.query = query;
     setState(() => news = []);
     await NewsService().fetchNews().then((response) {
       if (response.statusCode == 200) {
         var json = jsonDecode(response.body)['articles'];
         json.forEach((e) => news.add(NewsModel.fromJson(e)));
-        print(news);
+        setState(() {});
       }
     });
   }

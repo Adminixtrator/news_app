@@ -1,6 +1,6 @@
 abstract class Utils {
 
-  static String subS(String i, [int j = 25]) => i.length < j ? i : i.substring(0, j + 5) + '...';
+  static String subS(String i, [int j = 30]) => i.length < j ? i : i.substring(0, j) + '...';
   static String tab(int n) => '\t' * n;
   static String yesterday = DateTime.now().toString().split(' ').first;
 
