@@ -8,6 +8,7 @@ import 'package:news_app/shared/widgets/news_info.dart';
 import 'package:news_app/shared/widgets/profile_info_row.dart';
 import 'package:news_app/shared/widgets/share_button.dart';
 import 'package:news_app/shared/widgets/text_to_speech_button.dart';
+import 'package:news_app/utils/utils.dart';
 
 class News extends StatefulWidget {
   const News({
@@ -76,7 +77,8 @@ class _NewsState extends State<News> {
             ],
           ),
         ),
-        floatingActionButton: const TextToSpeechButton()
+        floatingActionButton: TextToSpeechButton(
+            corpus: widget.news.title! + Utils.tab(1) + widget.news.content!)
     );
   }
 }

@@ -105,7 +105,7 @@ class _HomeState extends State<Home> {
                                 horizontal: 20, vertical: 20),
                             itemBuilder: (BuildContext context, int index) {
                               return index == 0
-                                  ? FeaturedNews(featured: news[0])
+                                  ? FeaturedNews(featured: news[index])
                                   : NewsWidget(news: news[index + 1]);
                             }
                         ),
@@ -116,12 +116,14 @@ class _HomeState extends State<Home> {
   }
 
   void fetchNews(String query) async {
+    print(query);
     NewsService.query = query;
     setState(() => news = []);
     await NewsService().fetchNews().then((response) {
       if (response.statusCode == 200) {
         var json = jsonDecode(response.body)['articles'];
         json.forEach((e) => news.add(NewsModel.fromJson(e)));
+        print(news);
       }
     });
   }
