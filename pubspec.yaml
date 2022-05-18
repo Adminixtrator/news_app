@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   page_transition: ^2.0.5
   text_to_speech: ^0.2.3
+  http: ^0.13.4
+  flutter_dotenv: ^5.0.2
+  skeleton_loader: ^2.0.0+4
+  flutter_share: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +71,7 @@ flutter:
     - assets/fonts/
     - assets/gifs/
     - assets/audio/
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

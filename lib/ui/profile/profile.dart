@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/models/news_model.dart';
 import 'package:news_app/shared/widgets/news_widget.dart';
 import '../../core/constants/colors.dart';
 import '../../res/sizes.dart';
@@ -7,7 +8,12 @@ import '../../shared/widgets/button_back.dart';
 import '../../shared/widgets/profile_info_row_large.dart';
 
 class WriterProfile extends StatefulWidget {
-  const WriterProfile({Key? key}) : super(key: key);
+  const WriterProfile({
+    Key? key,
+    required this.news,
+  }) : super(key: key);
+
+  final NewsModel news;
 
   @override
   State<WriterProfile> createState() => _WriterProfileState();
@@ -24,7 +30,7 @@ class _WriterProfileState extends State<WriterProfile> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const ProfileInfoRowLarge(),
+          ProfileInfoRowLarge(news: widget.news),
           NSize.vH(10),
           Padding(padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
@@ -46,7 +52,7 @@ class _WriterProfileState extends State<WriterProfile> {
               shrinkWrap: true,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               itemBuilder: (BuildContext context, int index) {
-                return const NewsWidget();
+                return NewsWidget(news: widget.news);
               }))
         ],
       ),

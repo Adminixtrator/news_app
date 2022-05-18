@@ -22,7 +22,7 @@ class ImageBox extends StatelessWidget {
         color: AppColors.black.withAlpha(50),
         borderRadius: BorderRadius.circular(20),
         image: asset!.isNotEmpty ? DecorationImage(
-            image: AssetImage(asset!), fit: BoxFit.cover) : null,
+            image: NetworkImage(asset!), fit: BoxFit.cover) : null,
       ),
     );
   }

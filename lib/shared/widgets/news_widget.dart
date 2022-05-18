@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/models/news_model.dart';
 import '../../core/constants/colors.dart';
 import '../../res/sizes.dart';
 import '../../res/styles.dart';
 import '../../utils/utils.dart';
 
 class NewsWidget extends StatelessWidget {
-  const NewsWidget({Key? key}) : super(key: key);
+  const NewsWidget({
+    Key? key,
+    required this.news,
+  }) : super(key: key);
+
+  final NewsModel news;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +35,8 @@ class NewsWidget extends StatelessWidget {
             // height: MSize.take(100),
             width: MSize.take(110),
             decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(news.urlToImage!), fit: BoxFit.cover),
                 color: AppColors.black.withAlpha(50),
                 borderRadius: BorderRadius.circular(
                     15)
@@ -44,17 +52,17 @@ class NewsWidget extends StatelessWidget {
                 text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "Beauty\n",
+                        text: news.source!.name! + '\n',
                         style: Styles.categoryText,
                       ),
                       TextSpan(
-                        text: Utils.subS(
-                            "Samsung has decided it doesn’t want to make electric cars") +
+                        text: Utils.subS(news.title!) +
                             '\n',
                         style: Styles.headline3,
                       ),
                       TextSpan(
-                          text: '4 min ago' + Utils.tab(4) + '•' +
+                          text: Utils.timeAgoSinceDate(news.publishedAt!) +
+                              Utils.tab(4) + '•' +
                               Utils.tab(4) + '10 min read',
                           style: Styles.footerText
                       ),

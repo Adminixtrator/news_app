@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../../core/constants/colors.dart';
+import '../../core/models/news_model.dart';
 import '../../res/sizes.dart';
 import '../../res/styles.dart';
 import 'follow_button.dart';
 
 class ProfileInfoRowLarge extends StatefulWidget {
-  const ProfileInfoRowLarge({Key? key}) : super(key: key);
+  const ProfileInfoRowLarge({
+    Key? key,
+    required this.news,
+  }) : super(key: key);
+
+  final NewsModel news;
 
   @override
   State<ProfileInfoRowLarge> createState() => _ProfileInfoRowLargeState();
@@ -33,7 +39,7 @@ class _ProfileInfoRowLargeState extends State<ProfileInfoRowLarge> {
                 NSize.hW(15),
                 RichText(text: TextSpan(
                     children: [
-                      TextSpan(text: 'Alisa Manson\n',
+                      TextSpan(text: widget.news.author! + '\n',
                           style: Styles.headline4),
                       TextSpan(text: 'Creator of Pepe',
                           style: Styles.infoText),

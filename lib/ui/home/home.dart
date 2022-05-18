@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/colors.dart';
+import 'package:news_app/core/models/news_model.dart';
+import 'package:news_app/core/services/news/news_service.dart';
 import 'package:news_app/res/dummy.dart';
 import 'package:news_app/res/styles.dart';
 import 'package:news_app/shared/widgets/featured_news.dart';
@@ -20,6 +24,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    fetchNews(Dummy.newsCategory[0]);
     _controller.addListener(() {
       if (_controller.position.pixels <= 56) {
         setState(() => _physics = const ClampingScrollPhysics());
@@ -32,6 +37,7 @@ class _HomeState extends State<Home> {
   final _controller = ScrollController();
   ScrollPhysics _physics = const ClampingScrollPhysics();
   String category = Dummy.newsCategory[0];
+  List<NewsModel> news = [];
 
   @override
   void dispose() {
@@ -72,11 +78,13 @@ class _HomeState extends State<Home> {
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) =>
                       NewsCategory(
-                        title: Dummy.newsCategory[index],
-                        active: Dummy.newsCategory[index] == category,
-                        onPressed: () =>
+                          title: Dummy.newsCategory[index],
+                          active: category == Dummy.newsCategory[index],
+                          onPressed: () {
                             setState(() =>
-                            category = Dummy.newsCategory[index]),))),
+                            category = Dummy.newsCategory[index]);
+                            fetchNews(Dummy.newsCategory[index]);
+                          }))),
           NSize.vH(20),
           Expanded(
               child: SingleChildScrollView(
@@ -91,19 +99,30 @@ class _HomeState extends State<Home> {
                             child: Text("Featured", style: Styles.headline)),
                         ListView.builder(
                             shrinkWrap: true,
-                            itemCount: 4,
+                            itemCount: 5,
                             physics: const NeverScrollableScrollPhysics(),
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 20),
                             itemBuilder: (BuildContext context, int index) {
                               return index == 0
-                                  ? const FeaturedNews()
-                                  : const NewsWidget();
+                                  ? FeaturedNews(featured: news[0])
+                                  : NewsWidget(news: news[index + 1]);
                             }
                         ),
                       ]))),
         ],
       ),
     );
+  }
+
+  void fetchNews(String query) async {
+    NewsService.query = query;
+    setState(() => news = []);
+    await NewsService().fetchNews().then((response) {
+      if (response.statusCode == 200) {
+        var json = jsonDecode(response.body)['articles'];
+        json.forEach((e) => news.add(NewsModel.fromJson(e)));
+      }
+    });
   }
 }

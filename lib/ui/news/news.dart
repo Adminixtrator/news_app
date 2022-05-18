@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/constants/colors.dart';
+import 'package:news_app/core/models/news_model.dart';
 import 'package:news_app/res/sizes.dart';
 import 'package:news_app/res/styles.dart';
 import 'package:news_app/shared/widgets/button_back.dart';
 import 'package:news_app/shared/widgets/image_box.dart';
 import 'package:news_app/shared/widgets/news_info.dart';
-import 'package:news_app/shared/widgets/news_tag.dart';
 import 'package:news_app/shared/widgets/profile_info_row.dart';
 import 'package:news_app/shared/widgets/share_button.dart';
 import 'package:news_app/shared/widgets/text_to_speech_button.dart';
-import 'package:news_app/utils/utils.dart';
 
 class News extends StatefulWidget {
-  const News({Key? key}) : super(key: key);
+  const News({
+    Key? key,
+    required this.news,
+  }) : super(key: key);
+
+  final NewsModel news;
 
   @override
   State<News> createState() => _NewsState();
@@ -47,7 +50,7 @@ class _NewsState extends State<News> {
           leading: const ButtonBack(),
           leadingWidth: 70,
           actions: [
-            const ShareButton(),
+            ShareButton(news: widget.news),
             NSize.hW(20),
           ],
         ),
@@ -57,17 +60,18 @@ class _NewsState extends State<News> {
           controller: _controller,
           child: Column(
             children: [
-              const NewsInfo(),
+              NewsInfo(news: widget.news),
               NSize.vH(25),
-              Text("Here's What You Need To Know About Dumplings",
+              Text(widget.news.title!,
                   style: Styles.header),
               NSize.vH(25),
-              const ProfileInfoRow(),
+              ProfileInfoRow(news: widget.news),
               NSize.vH(30),
-              ImageBox(height: MSize.take(220), width: double.infinity),
+              ImageBox(height: MSize.take(220),
+                  width: double.infinity,
+                  asset: widget.news.urlToImage),
               NSize.vH(20),
-              Text(
-                  "SamMobile has affiliate and sponsored partnerships. If you buy something through one of these links, we may earn a commission.Electric cars are believed to be the future of mobility.\n\nSamMobile has affiliate and sponsored partnerships. If you buy something through one of these links, we may earn a commission.Electric cars are believed to be the future of mobility.",
+              Text(widget.news.content!,
                   style: Styles.bodyText)
             ],
           ),

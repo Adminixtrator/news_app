@@ -4,7 +4,7 @@ import '../../core/constants/colors.dart';
 import '../../res/sizes.dart';
 import '../../res/styles.dart';
 
-class NewsCategory extends StatelessWidget {
+class NewsCategory extends StatefulWidget {
   const NewsCategory({
     Key? key,
     required this.active,
@@ -17,18 +17,25 @@ class NewsCategory extends StatelessWidget {
   final Function() onPressed;
 
   @override
+  State<NewsCategory> createState() => _NewsCategoryState();
+}
+
+class _NewsCategoryState extends State<NewsCategory> {
+  @override
   Widget build(BuildContext context) {
     return Container(
         height: MSize.take(50),
         width: MSize.take(120),
         margin: const EdgeInsets.only(right: 30),
         child: ElevatedButton(
-            onPressed: onPressed,
+            onPressed: widget.onPressed,
             style: ButtonStyle(
-                elevation: active ? null : MaterialStateProperty.all(0),
+                elevation: widget.active ? null : MaterialStateProperty.all(0),
                 backgroundColor: MaterialStateProperty.all(
-                    active ? AppColors.black : AppColors.faintGrey.withAlpha(
+                    widget.active ? AppColors.black : AppColors.faintGrey
+                        .withAlpha(
                         100)),
+                animationDuration: const Duration(seconds: 0),
                 shape: MaterialStateProperty.all<
                     RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -36,7 +43,8 @@ class NewsCategory extends StatelessWidget {
                           14),
                     )
                 )),
-            child: Text(title,
-              style: active ? Styles.activeTabText : Styles.inactiveTabText,)));
+            child: Text(widget.title,
+              style: widget.active ? Styles.activeTabText : Styles
+                  .inactiveTabText,)));
   }
 }

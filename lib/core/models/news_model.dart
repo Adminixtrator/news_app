@@ -22,14 +22,14 @@ class NewsModel {
   });
 
   NewsModel.fromJson(Map<String, dynamic> json) {
-    source = json['source'] as NewsSource;
-    title = json['title'] as String;
-    url = json['url'] as String;
-    description = json['description'] as String;
-    author = json['author'] as String;
-    content = json['content'] as String;
-    publishedAt = json['publishedAt'] as String;
-    urlToImage = json['urlToImage'] as String;
+    source = NewsSource.fromJson(json['source']);
+    title = json['title'].toString();
+    url = json['url'].toString();
+    description = json['description'].toString();
+    author = json['author'].toString();
+    content = json['content'].toString();
+    publishedAt = json['publishedAt'].toString();
+    urlToImage = json['urlToImage'].toString();
   }
 }
 
@@ -40,7 +40,7 @@ class NewsSource {
   NewsSource({this.id, required this.name});
 
   NewsSource.fromJson(Map<String, dynamic> json) {
-    id = json['id'] as String;
-    name = json['name'] as String;
+    id = json['id'].toString();
+    name = json['name'].toString();
   }
 }

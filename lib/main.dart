@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:news_app/ui/home/home.dart';
 import 'package:news_app/utils/navigator.dart';
 
 import 'core/constants/colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+  // Hive.init(directory.path);
   runApp(const MyApp());
 }
 
