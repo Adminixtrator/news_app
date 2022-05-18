@@ -50,7 +50,15 @@ abstract class Styles {
   static TextStyle smallText = const TextStyle(
       color: AppColors.black,
       fontSize: Fonts.pixel16 - 1,
-      fontWeight: Fonts.w6
+      fontWeight: Fonts.w6,
+      fontFamily: 'Nunito'
+  );
+
+  static TextStyle smallText2 = const TextStyle(
+      color: AppColors.black,
+      fontSize: Fonts.pixel18 - 1,
+      fontWeight: Fonts.w7,
+      fontFamily: 'Nunito'
   );
 
   static TextStyle categoryText = TextStyle(
@@ -66,6 +74,29 @@ abstract class Styles {
       fontSize: Fonts.pixel14,
       fontFamily: 'Nunito',
       height: 2.5,
+      fontWeight: Fonts.w4
+  );
+
+  static TextStyle footerText2 = TextStyle(
+      color: AppColors.black.withAlpha(100),
+      fontSize: Fonts.pixel14,
+      fontFamily: 'Nunito',
+      height: 1.3,
+      fontWeight: Fonts.w4
+  );
+
+  static TextStyle infoText = const TextStyle(
+      color: AppColors.black,
+      fontSize: Fonts.pixel14,
+      fontFamily: 'Nunito',
+      fontWeight: Fonts.w4
+  );
+
+  static TextStyle bodyText = const TextStyle(
+      color: AppColors.black,
+      fontSize: Fonts.pixel18,
+      height: 1.5,
+      fontFamily: 'Nunito',
       fontWeight: Fonts.w4
   );
 }

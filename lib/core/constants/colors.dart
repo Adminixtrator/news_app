@@ -5,6 +5,8 @@ static const Color white = Color(0xFFFFFFFF);
 static const Color black = Color(0xFF000000);
 static const Color transparent = Colors.transparent;
 static Color? lineGrey = Colors.grey[300];
+static Color faintGrey = const Color(0xFFD4D4D4);
+static Color red = Colors.redAccent;
 
 }
 

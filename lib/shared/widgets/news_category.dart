@@ -25,9 +25,10 @@ class NewsCategory extends StatelessWidget {
         child: ElevatedButton(
             onPressed: onPressed,
             style: ButtonStyle(
-              elevation: active ? null : MaterialStateProperty.all(0),
+                elevation: active ? null : MaterialStateProperty.all(0),
                 backgroundColor: MaterialStateProperty.all(
-                    active ? AppColors.black : const Color(0xFFD4D4D4).withAlpha(100)),
+                    active ? AppColors.black : AppColors.faintGrey.withAlpha(
+                        100)),
                 shape: MaterialStateProperty.all<
                     RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -35,6 +36,7 @@ class NewsCategory extends StatelessWidget {
                           14),
                     )
                 )),
-            child: Text(title, style: active ? Styles.activeTabText : Styles.inactiveTabText,)));
+            child: Text(title,
+              style: active ? Styles.activeTabText : Styles.inactiveTabText,)));
   }
 }

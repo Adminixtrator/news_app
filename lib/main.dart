@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app/ui/home/home.dart';
+import 'package:news_app/utils/navigator.dart';
 
 import 'core/constants/colors.dart';
 
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: colorCustom,
       ),
       home: const Home(),
+      onGenerateRoute: AppNavigator.generateRoute,
     );
   }
 }
