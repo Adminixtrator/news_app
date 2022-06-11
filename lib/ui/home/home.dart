@@ -119,7 +119,7 @@ class _HomeState extends State<Home> {
   void fetchNews(String query) async {
     NewsService.query = query;
     setState(() => news = []);
-    await NewsService().fetchNews().then((response) {
+    await NewsService.fetchNews().then((response) {
       if (response.statusCode == 200) {
         var json = jsonDecode(response.body)['articles'];
         json.forEach((e) => news.add(NewsModel.fromJson(e)));
